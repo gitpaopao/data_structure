@@ -31,7 +31,26 @@ public class TimeComplexity {
         int middle = (l + r)/2;
         int left = process(arr,l,middle);
         int right = process(arr,middle+1,r);
-//        return left>right?left:right;
         return Math.max(left,right);
     }
+
+
+    /**
+     * A、B 两个数组，A 有序，B 无序，打印B中不在A中包含的数据
+     *
+     * 类似外排的方式：
+     *
+     * ① B排序
+     * ② 借助两个指针变量，分别指向 A B 的第一个数字，
+     *      当A < B时，A右移；
+     *      A = B时，B右移；
+     *      A > B时，B打印并右移
+     * ③ 任一个数组越界，结束
+     *
+     */
+    public static void printNum(){
+
+    }
 }
+
+
