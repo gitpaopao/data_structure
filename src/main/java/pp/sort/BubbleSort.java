@@ -8,6 +8,7 @@ import java.util.Arrays;
  * 冒泡排序(和数据状况无关)
  *
  * 时间复杂度 O(N^2)
+ * 稳定
  */
 public class BubbleSort {
 

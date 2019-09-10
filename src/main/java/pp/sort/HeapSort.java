@@ -11,6 +11,8 @@ import java.util.Arrays;
  *
  * 升序
  * 删除的堆顶是堆中最大的元素，即大根堆
+ *
+ * 不稳定
  */
 public class HeapSort {
 

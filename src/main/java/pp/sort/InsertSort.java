@@ -9,6 +9,7 @@ import java.util.Arrays;
  *
  *   时间复杂度 O(N^2)
  *   依次与有序数列的数字比较、往前插入
+ *   稳定
  */
 public class InsertSort {
 

@@ -5,6 +5,8 @@ package pp.sort;
  *
  * 归并排序
  * 时间复杂度 O(NlogN)
+ *
+ * 左区和右区相等时，先拷贝左区，可实现稳定性
  */
 public class MergeSort {
 
