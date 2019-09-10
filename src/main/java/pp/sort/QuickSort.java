@@ -64,9 +64,14 @@ public class QuickSort {
     }
 
     public static void swap(int[] arr,int i,int j){
-        arr[i] = arr[i] ^ arr[j];
-        arr[j] = arr[i] ^ arr[j];
-        arr[i] = arr[i] ^ arr[j];
+        if (i != j){
+            arr[i] = arr[i] ^ arr[j];
+            arr[j] = arr[i] ^ arr[j];
+            arr[i] = arr[i] ^ arr[j];
+        }
+//        int temp = arr[i];
+//        arr[i] = arr[j];
+//        arr[j] = temp;
     }
 
 //    -------------------------------------------------------
@@ -143,8 +148,9 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[] {4,4,6,5,3,2,8,1};
+        int[] arr = new int[] {4,4,6,5,1};
         quickSort(arr, 0, arr.length-1);
+//        process1(arr,0,arr.length-1);
         System.out.println(Arrays.toString(arr));
     }
 }
