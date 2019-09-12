@@ -16,8 +16,6 @@ import java.util.Arrays;
  *  额外空间复杂度是用来记录断点的位置，只有记录断点，才能知道右半个区域在哪
  *
  *  不稳定（做交换的时候，会破坏稳定性）
- *
- *  基准值对面的哨兵先移动
  */
 public class QuickSort {
 
@@ -90,13 +88,10 @@ public class QuickSort {
 
     /**
      * 双边循环法
-     * @param arr     待交换的数组
-     * @param l    起始下标
-     * @param r    结束下标
      *
-     * 先从右边向左移，遇到小于pivot的值停止；从左边向右移，遇到大于pivot的值停止；
-     * 交换左右指针的位置，继续比较移动；
-     * 指针重合的时候，说明左边均小于pivot，右边均大于pivot，即指针位置为pivot的最终位置
+     * 需要注意的点：
+     *     ① 从基准值对面的哨兵可以移动
+     *     ② 注意判断条件，不能卡在基准值的位置
      */
     public static int patition1(int[] arr,int l,int r){
         // 取第一个位置的元素作为基准元素
@@ -126,7 +121,7 @@ public class QuickSort {
 
     /**
      * 单边循环法
-     * @param arr     待交换的数组
+     * @param arr    待交换的数组
      * @param l    起始下标
      * @param r    结束下标
      *
