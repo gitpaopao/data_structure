@@ -44,7 +44,7 @@ public class QuickSort {
         int less = l-1;
 //        右区边界
         int more = r;
-//        每次迭代访问 l 处的数字
+//        每次迭代访问 l 处的数字，基准值是arr[r]
         while (l<more){
 //          < 和左区下一个交换++less，左区右扩一个，访问L下一个
             if (arr[l] < arr[r]) {
@@ -57,8 +57,8 @@ public class QuickSort {
                 l++;
             }
         }
-//        调出循环是，l=more
-//        一直是以r处为基准，所以arr[r]是属于中间区的，和右区第一个交换，即交换完，右区第一个more位置是属于中间区的
+//        跳出循环是，l=more
+//        一直是以r处为基准，arr[r]是属于中间区的，和右区第一个交换，即交换完，右区第一个more位置是属于中间区的
         swap(arr,more,r);
 //        返回中间区的位置，左区下一个，到more的位置
         return new int[]{less+1,more};
@@ -70,9 +70,6 @@ public class QuickSort {
             arr[j] = arr[i] ^ arr[j];
             arr[i] = arr[i] ^ arr[j];
         }
-//        int temp = arr[i];
-//        arr[i] = arr[j];
-//        arr[j] = temp;
     }
 
 //    -------------------------------------------------------
@@ -81,7 +78,7 @@ public class QuickSort {
         if (l >= r){
             return;
         }
-        int pivotIndex = patition1(arr,l,r);
+        int pivotIndex = patition2(arr,l,r);
         quickSort(arr,l,pivotIndex-1);
         quickSort(arr,pivotIndex+1,r);
     }

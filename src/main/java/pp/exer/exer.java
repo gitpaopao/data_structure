@@ -1,7 +1,5 @@
 package pp.exer;
 
-import java.util.Arrays;
-
 /**
  * Created by pkpm on 2019/9/11
  */
@@ -48,59 +46,4 @@ public class exer {
      */
 
 
-    /**
-     * 8. 在链表上实现荷兰国旗问题
-     *   (借助容器数组，在数组上patition，然后再串起来)
-     *
-     * 进阶：左中右三个部分的内部也做顺序要求，与原链表中节点的先后次序一致
-     *      时间复杂度O(N),空间复杂度O(1)
-     *
-     *      借助6个指针，遍历链表，找到第一个小于pivot的less，等于pivot的mid，大于的more
-     *      再次遍历链表，小于pivot的不是less，挂在less下，同理……
-     *      每个区域用两个变量记录头指针和尾指针，然后将三个区域串起来
-     */
-
-    public static void quick(int[] arr, int l, int r){
-        if (l >= r){
-            return;
-        }
-        int index = partition(arr, l, r);
-        quick(arr,l,index-1);
-        quick(arr,index+1,r);
-    }
-
-    public static int partition(int[] arr, int l, int r){
-        int left = l;
-        int right = r;
-        int pivot = arr[left];
-        while (left != right){
-            while (left < right && arr[right] > pivot){
-                right--;
-            }
-            while (left < right && arr[left] <= pivot) {
-                left++;
-            }
-            swap(arr, left, right);
-        }
-        swap(arr,l,left);
-        return left;
-    }
-
-    public static void swap(int[] arr, int i, int j){
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-//        if (i == j){
-//            return;
-//        }
-//        arr[i] = arr[i] ^ arr[j];
-//        arr[j] = arr[i] ^ arr[j];
-//        arr[i] = arr[i] ^ arr[j];
-    }
-
-    public static void main(String[] args){
-        int[] arr = new int[]{5,1,2,1,9};
-        quick(arr,0, arr.length-1);
-        System.out.println(Arrays.toString(arr));
-    }
 }
