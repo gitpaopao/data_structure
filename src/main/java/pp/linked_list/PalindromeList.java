@@ -5,7 +5,7 @@ import java.util.Stack;
 /**
  * Created by pkpm on 2019/9/12
  *
- * 判断链表是否是回文结构
+ * 判断链表是否是回文结构  1 2 3 2 1
  *    实质就是判断 逆序和正序是否一致
  */
 public class PalindromeList {
