@@ -17,7 +17,7 @@ public class BinaryTreeTraversalStack {
      * 二叉树节点
      */
     @Data
-    private static class TreeNode{
+    public static class TreeNode{
         int data;
         TreeNode leftChild;
         TreeNode rightChild;
@@ -55,12 +55,11 @@ public class BinaryTreeTraversalStack {
         }
         Stack<TreeNode> stack = new Stack<>();
         TreeNode node = root;
-
 //        当左右孩子都为空时，栈不为空，是连续两次出栈
         while (node != null || !stack.isEmpty()) {
 //            迭代访问左孩子，入栈
             while (node != null) {
-                System.out.println(node.getData());
+                System.out.print(node.getData() + " ");
                 stack.push(node);
                 node = node.getLeftChild();
             }
@@ -72,6 +71,24 @@ public class BinaryTreeTraversalStack {
         }
     }
 
+
+    public static void preOrderTravesal2(TreeNode root){
+        if (root == null){
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            System.out.print(node.data + " ");
+            if (node.rightChild != null){
+                stack.push(node.rightChild);
+            }
+            if (node.leftChild != null){
+                stack.push(node.leftChild);
+            }
+        }
+    }
     /**
      * 中序遍历
      */
@@ -89,7 +106,7 @@ public class BinaryTreeTraversalStack {
             //  左孩子为空时，父节点出栈，迭代访问右子树
             if(!stack.isEmpty()){
                 node = stack.pop();
-                System.out.println(node.getData());
+                System.out.print(node.getData() + " ");
                 node = node.getRightChild();
             }
         }
@@ -97,6 +114,7 @@ public class BinaryTreeTraversalStack {
 
     /**
      * 后序遍历
+     *
      */
     public static void postOrderTravesal(TreeNode root){
         if (root == null){
@@ -116,7 +134,7 @@ public class BinaryTreeTraversalStack {
 //            没有右孩子或右孩子访问过
             if (cur.getRightChild() == null || cur.getRightChild() == last){
 //                访问该父节点
-                System.out.println(cur.getData());
+                System.out.print(cur.getData() + " ");
                 last = cur;
 //              出栈
             }else {
@@ -131,14 +149,53 @@ public class BinaryTreeTraversalStack {
         }
     }
 
+//    左右中   中右左，该打印的时候就入栈
+    public static void postOrderTravesal2(TreeNode root){
+        if (root == null){
+            return;
+        }
+        Stack<TreeNode> stackA = new Stack<>();
+        Stack<TreeNode> stackB = new Stack<>();
+        stackA.push(root);
+        while (!stackA.isEmpty()){
+            TreeNode node = stackA.pop();
+            stackB.push(node);
+            if (node.leftChild != null){
+                stackA.push(node.leftChild);
+            }
+            if (node.rightChild != null){
+                stackA.push(node.rightChild);
+            }
+        }
+        while (!stackB.isEmpty()){
+            System.out.print(stackB.pop().data + " ");
+        }
+    }
+
     public static void main(String[] args) {
-        LinkedList<Integer> inputList = new LinkedList<Integer>(Arrays.asList(new Integer[]{3,2,9,null,null,10,null,null,8,null,4,}));
+        LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(new Integer[]{3,2,9,null,null,10,null,null,8,null,4,}));
         TreeNode treeNode = createBinaryTree(inputList);
-        System.out.println("前序遍历：");
+        System.out.print("前序遍历1： ");
         preOrderTravesal(treeNode);
-        System.out.println("中序遍历：");
+        System.out.println();
+
+        System.out.print("前序遍历2： ");
+        preOrderTravesal2(treeNode);
+        System.out.println();
+
+        System.out.print("中序遍历 ： ");
         inOrderTravesal(treeNode);
-        System.out.println("后序遍历：");
+        System.out.println();
+
+        System.out.print("后序遍历1： ");
         postOrderTravesal(treeNode);
+        System.out.println();
+
+        System.out.print("后序遍历2： ");
+        postOrderTravesal2(treeNode);
+        System.out.println();
+
+        System.out.println("直观的打印二叉树：");
+        PrintBinaryTree.printTree(treeNode);
     }
 }
