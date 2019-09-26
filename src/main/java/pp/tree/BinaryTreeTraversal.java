@@ -85,6 +85,11 @@ public class BinaryTreeTraversal {
         System.out.println(node.getData());
     }
 
+    /**
+     * 二叉树的序列化和反序列化
+     *      保留一棵树的结构：利用空占位
+     *      恢复一颗二叉树：根据序列化的顺序进行反序列化
+     */
     public static void main(String[] args) {
         LinkedList<Integer> inputList = new LinkedList<Integer>(Arrays.asList(new Integer[]{3,2,9,null,null,10,null,null,8,null,4,}));
         TreeNode treeNode = createBinaryTree(inputList);
