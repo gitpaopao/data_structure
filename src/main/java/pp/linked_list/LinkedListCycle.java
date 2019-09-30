@@ -38,7 +38,7 @@ public class LinkedListCycle {
         return false;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Node node1 = new Node(5);
         Node node2 = new Node(3);
         Node node3 = new Node(7);
