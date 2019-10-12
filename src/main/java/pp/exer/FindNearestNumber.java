@@ -25,7 +25,7 @@ public class FindNearestNumber {
         int head = numbers[index-1];
         for (int i=numbers.length-1; i>0; i--){
             if (numbers[i] > head){
-                numbers[i-1] = numbers[i];
+                numbers[index-1] = numbers[i];
                 numbers[i] = head;
                 break;
             }
