@@ -13,6 +13,25 @@ import java.util.Arrays;
  */
 public class InsertSort {
 
+
+
+    public static void insertSort2(int[] array){
+        if (array == null || array.length <2){
+            return;
+        }
+        // from small to big
+        for(int i = 1; i< array.length; i++){
+
+            for(int j = i-1; j>=0; j--){
+                if(array[j] > array[j+1]){
+                    swap(array,j,j+1);
+                }
+            }
+        }
+    }
+
+
+
     public static void insertSort(int[] array){
         if (array == null || array.length <2){
             return;
@@ -72,7 +91,7 @@ public class InsertSort {
        for (int i=0; i<testTime;i++){
            int[] arr1 = generateRandomArray(maxSize, maxValue);
            int[] arr2 = copyArray(arr1);
-           insertSort(arr1);
+           insertSort2(arr1);
            comparator(arr2);
            if (!isEqual(arr1,arr2)){
                succeed = false;
