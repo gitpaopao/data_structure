@@ -31,7 +31,10 @@ public class Islands {
         }
         return num;
     }
-//    把可以连在一片的1都置为2
+
+    /**
+     * 感染函数：把可以连在一片的1都置为2
+     */
     private static void infect(int[][] array, int i, int j, int m, int n){
         if (i<0 || i>=m || j<0 || j>=n || array[i][j] != 1){
             return;
@@ -60,4 +63,14 @@ public class Islands {
                         { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, };
         System.out.println(countLand(m2));
     }
+
+    /**
+     * 利用并查集优化
+     *  将一个大矩阵化成多个小矩阵，然后不同的CPU处理不同的矩阵，最后将不同的矩阵合并。
+     *
+     *  边界问题，将边界上连成一片的1合并：
+     *      在解决边界时，若两个1碰到一起了(属于一个岛)，就检查两个1的代表结点(感染它的节点)是不是一样的，
+     *      不一样的话，就合并两个集合，同时岛的个数-1；
+     *      一样的话，证明之前已经合并过了，岛的个数不变。
+     */
 }

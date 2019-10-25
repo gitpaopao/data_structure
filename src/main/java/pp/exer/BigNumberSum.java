@@ -7,7 +7,9 @@ package pp.exer;
  */
 public class BigNumberSum {
 
-    //1.把两个大整数用数组逆序存储，数组长度等于较大整数位数+1（长度+1是预留给进位用的,逆序存储是方便从左向右访问数组）
+    /**
+     * 把两个大整数用数组逆序存储，数组长度等于较大整数位数+1（长度+1是预留给进位用的,逆序存储是方便从左向右访问数组）
+     */
     public static String bigNumberSum(String bigNumberA, String bigNumberB) {
         int maxLength = bigNumberA.length() > bigNumberB.length() ? bigNumberA.length() : bigNumberB.length();
         int[] arrA = new int[maxLength+1];

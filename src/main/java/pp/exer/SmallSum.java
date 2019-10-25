@@ -29,7 +29,9 @@ public class SmallSum {
                 +merge(arr,1,mid,r);
     }
 
-//    合并后不会重复产生小和，就是一个整体，和另一部分进行合并，原小组内不会产生小和
+    /**
+     * 合并后不会重复产生小和，就是一个整体，和另一部分进行合并，原小组内不会产生小和
+     */
     public static int merge(int[] arr,int l, int m,int r){
         int[] help = new int[r-l+1];
         int i = 0;
