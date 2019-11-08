@@ -1,5 +1,7 @@
 package pp.greedy;
 
+import pp.array.Logarithm;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -81,17 +83,6 @@ public class MedianQuick {
     }
 
     /**
-     * 生成随机数组
-     */
-    public static int[] getRandomArray(int maxLen, int maxValue) {
-        int[] res = new int[(int) (Math.random() * maxLen) + 1];
-        for (int i = 0; i != res.length; i++) {
-            res[i] = (int) (Math.random() * maxValue);
-        }
-        return res;
-    }
-
-    /**
      * 暴力解
      */
     public static int getMedianOfArray(int[] arr) {
@@ -114,7 +105,7 @@ public class MedianQuick {
         for (int i = 0; i != testTimes; i++) {
             int len = 10;
             int maxValue = 100;
-            int[] arr = getRandomArray(len, maxValue);
+            int[] arr = Logarithm.getRandomArray(len, maxValue);
             MedianHolder holder = new MedianHolder();
             for (int j = 0; j != arr.length; j++) {
                 holder.addNum(arr[j]);
@@ -124,17 +115,11 @@ public class MedianQuick {
                 break;
             }
             if (err) {
-                printArray(arr);
+                Logarithm.printArray(arr);
             }
             System.out.println(err);
             System.out.println("---------------------------");
         }
     }
 
-    public static void printArray(int[] arr) {
-        for (int i = 0; i != arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
-    }
 }
