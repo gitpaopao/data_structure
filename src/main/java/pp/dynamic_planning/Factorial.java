@@ -14,6 +14,7 @@ public class Factorial {
         return n * getFactorial1(n-1);
     }
 
+//    动态规划
     public static long getFactorial2(int n){
         int res = 1;
         for (int i=0; i<n; i++){

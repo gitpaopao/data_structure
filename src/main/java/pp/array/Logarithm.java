@@ -25,4 +25,20 @@ public class Logarithm {
         }
         System.out.println();
     }
+
+    /**
+     * 生成随机矩阵
+     */
+    public static int[][] generateRandomMatrix(int rowSize, int colSize) {
+        if (rowSize < 0 || colSize < 0) {
+            return null;
+        }
+        int[][] result = new int[rowSize][colSize];
+        for (int i = 0; i != result.length; i++) {
+            for (int j = 0; j != result[0].length; j++) {
+                result[i][j] = (int) (Math.random() * 10);
+            }
+        }
+        return result;
+    }
 }
