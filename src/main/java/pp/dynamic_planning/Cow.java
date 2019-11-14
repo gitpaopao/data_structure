@@ -9,6 +9,7 @@ package pp.dynamic_planning;
 public class Cow {
 
     /**
+     * 递归
      * 前一年每年的数量 + 3年前母牛的数量 * 1
      */
     public static int cowNumber1(int n) {

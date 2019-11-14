@@ -47,13 +47,15 @@ public class Ali {
     }
 
     /**
-     * 固定参数n,p 与具体的递归状态无关
-     * 只关注 curPosition 与 restStep
+     * 动态规划
+     * 固定参数n,p 与具体的递归状态无关, 只关注 curPosition 与 restStep
+     * 最终要得到的是(k,m) 在m 位置剩余k 步
      */
     public static int getWays2(int n, int p, int m, int k) {
         if (n < 2 || p < 0 || p > n || k < 0 || m < 0 || m > n) {
             return 0;
         }
+        //0~k行，0~n列
         int[][] dp = new int[k + 1][n + 1];
         // 第一行的值,p位置为1，其他为0
         dp[0][p] = 1;
@@ -64,23 +66,18 @@ public class Ali {
             }
             dp[i][n] = dp[i - 1][n-1];
         }
+        // 最终要返回的是k行m列的值
         return dp[k][m];
     }
 
     public static void main(String[] args) {
-        // System.out.println(getWays1(7, 5, 4, 9));
-        // System.out.println(getWays2(7, 5, 4, 9));
-        //
-        // System.out.println(getWays1(5,3,2,3));
-        // System.out.println(getWays2(5,3,2,3));
-        //
-        // System.out.println(getWays1(7,4,2,6));
-        // System.out.println(getWays2(7,4,2,6));
+        System.out.println(getWays1(7, 5, 4, 9));
+        System.out.println(getWays2(7, 5, 4, 9));
 
-        String s = "abc=&";
-        String[] split = s.split("=");
-        // System.out.println(split.length);
-        // System.out.println(split[0]);
-        System.out.println(s.substring(0,s.length()-1));
+        System.out.println(getWays1(5,3,2,3));
+        System.out.println(getWays2(5,3,2,3));
+
+        System.out.println(getWays1(7,4,2,6));
+        System.out.println(getWays2(7,4,2,6));
     }
 }
