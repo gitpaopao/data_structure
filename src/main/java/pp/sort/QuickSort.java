@@ -109,7 +109,13 @@ public class QuickSort {
                 swap(arr,left,right);
             }
         }
-//        指针重合处，就是基准值的位置
+
+        /*   指针重合位置的值，交换到第一个位置
+             指针重合处，就是基准值的位置
+             两个指针会重合：1⃣️ j停下，i走到j，j停下是遇到了小于pivot的值
+                           2⃣️ j走到i，i位置的值一定小于等于pivot
+             所以重合位置的值一定是小于等于pivot的，交换到第一个位置是合理的
+        */
         swap(arr,left,l);
         return left;
     }
