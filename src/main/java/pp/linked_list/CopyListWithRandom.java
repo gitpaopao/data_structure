@@ -16,7 +16,6 @@ public class CopyListWithRandom {
         int data;
         Node next;
         Node rand;
-
         public Node(int data) {
             this.data = data;
         }
@@ -96,7 +95,7 @@ public class CopyListWithRandom {
         System.out.println();
 
         cur = head;
-        System.out.print("rand:  ");
+        System.out.print("rand:   ");
         while (cur != null) {
             System.out.print(cur.rand == null ? "- " : cur.rand.data + " ");
             cur = cur.next;
@@ -105,10 +104,7 @@ public class CopyListWithRandom {
     }
 
     public static void main(String[] args){
-        Node head = null;
-        printList(head);
-        System.out.println("--------------------------------");
-
+        Node head;
         head = new Node(1);
         head.next = new Node(2);
         head.next.next = new Node(3);

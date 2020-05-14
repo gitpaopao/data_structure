@@ -13,8 +13,6 @@ public class PalindromeList {
     /**
      * 解法1：
      * 使用栈，需要 n 个额外空间
-     * @param head
-     * @return
      */
     public static boolean isPalindrome1(Node head){
         if (head == null || head.next == null){
@@ -76,50 +74,48 @@ public class PalindromeList {
      * 解法3：
      * in-place:
      *    时间复杂度O(N),空间复杂度O(1)
-     *    找到右区前一个位置，将右区逆序，两个指针遍历，比较左区和右区是否相等，遍历完成后，将链表恢复
+     *    找到右区前一个位置,将右区逆序,两个指针遍历,比较左区和右区是否相等,遍历完成后,将链表恢复
      */
     public static boolean isPalindrome3(Node head){
         if (head == null || head.next == null){
             return true;
         }
-//        1. 找中点，n1 落在右区前一个
-        Node n1 = head;
-        Node n2 = head;
-        while (n2.next != null && n2.next.next != null){
-            n2 = n2.next.next;
-            n1 = n1.next;
+        // 1.找中间节点
+        Node quick = head;
+        Node slow = head;
+        while (quick.next != null && quick.next.next != null){
+            quick = quick.next.next;
+            slow = slow.next;
         }
-//        2. 将右区逆序
-        Node n3 = null;
-        n2 = n1.next;
-        n1.next = null;
-        while (n2 != null){
-            n3 = n2.next;
-            n2.next = n1;
-            n1 = n2;
-            n2 = n3;
+        // 2.将右半部分逆序
+        Node prev = slow;
+        prev.next = null;
+        Node cur = slow.next;
+        Node next;
+        while (cur != null){
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
         }
-//        逆序后，n1在最后一个节点
-//        暂存一下尾节点的位置，便于最后将链表恢复
-        n3 = n1;
-//        3. 遍历比较左区和右区
+        //暂存尾节点
+        cur = prev;
         boolean flag = true;
-        while (n1 != null && head != null){
-            if (n1.data != head.data){
+        while (head != null && prev != null){
+            if (head.data != prev.data){
                 flag = false;
                 break;
             }
-            n1 = n1.next;
             head = head.next;
+            prev = prev.next;
         }
-//        4. 将链表恢复，右区逆序回来
-        n1 = n3.next;
-        n3.next = null;
-        while (n1 != null){
-            n2 = n1.next;
-            n1.next = n3;
-            n3 = n1;
-            n1 = n2;
+        // 3.逆序回来
+        prev = null;
+        while (cur != null){
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
         }
         return flag;
     }
