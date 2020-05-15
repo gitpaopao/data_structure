@@ -4,43 +4,46 @@ package pp.linked_list;
  * Created by pkpm on 2019/9/20
  * 查找两个单链表相交的第一个节点（可能相交，也可能不相交）
  * 链表可能有环，也可能无环
- *
+ * <p>
  * 时间复杂度O(N+M)
  * 额外空间O(1)
  */
 public class FindFirstIntersectNode {
 
     /**
-     * 一个有环，一个无环，是不可能相交的
-     * 所以分两大类：均无环 / 均有环
+     * 通过入环点判断是否有环
+     * ①一个有环，一个无环：不相交
+     * ②均无环
+     * ③均有环
      */
-    public static Node getIntersectNode(Node head1, Node head2){
-        if (head1 == null || head2 == null){
+    public static Node getIntersectNode(Node head1, Node head2) {
+        if (head1 == null || head2 == null) {
             return null;
         }
+        // 获取入环点
         Node loop1 = getLoopNode(head1);
         Node loop2 = getLoopNode(head2);
-        if (loop1 == null && loop2 == null){
-            return noLoop(head1,head2);
+        if (loop1 == null && loop2 == null) {
+            return noLoop(head1, head2);
         }
-        if (loop1 != null && loop2 != null){
-            return bothLoop(head1,loop1,head2,loop2);
+        if (loop1 != null && loop2 != null) {
+            return bothLoop(head1, loop1, head2, loop2);
         }
         return null;
     }
 
     /**
      * 入环点
-     *
+     * <p>
      * 头结点head，入环点loop，首次相遇点meet
      * head 到loop的距离是 d1，loop到meet的距离是s1，meet到loop的距离是s2，s1+s2是一圈
-     *
+     * <p>
      * 首次相遇时，快指针走的路程是慢指针的2倍，d1+s1+n(s1+s2) = 2(d1+s1), 得到 d1=(n-1)(s1+s2)+s2
-     *      即从头到入环点的距离，等于 首次相遇点经过n-1圈回到入环点的距离
-     *      所以，一个指针从head，一个指针从meet，下一次相遇点就是入环点
+     * 即从头到入环点的距离，等于 首次相遇点经过n-1圈回到入环点的距离
+     * 所以，一个指针从head，一个指针从meet，下一次相遇点就是入环点
      */
-    public static Node getLoopNode(Node head){
-        if (head == null || head.next == null || head.next.next == null){
+    public static Node getLoopNode(Node head) {
+       /* if (head == null || head.next == null || head.next.next == null){
             return null;
         }
         Node fast = head.next.next;
@@ -59,39 +62,62 @@ public class FindFirstIntersectNode {
             fast = fast.next;
             slow = slow.next;
         }
-        return slow;
+        return slow;*/
+        // 找到meet节点
+        Node fast = head;
+        Node slow = head;
+        Node meet = null;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                meet = fast;
+                break;
+            }
+        }
+        // 不会相遇,即无环
+        if (meet == null) {
+            return null;
+        }
+        while (head != meet) {
+            head = head.next;
+            meet = meet.next;
+        }
+        return meet;
     }
 
     /**
      * 两个链表都无环
-     *  ①不相交
-     *  ②若相交就是Y型相交，长链表先走差值步，然后一起走，节点相等时即为相交点
+     * ①不相交, 尾节点不同
+     * ②Y型相交,长链表先走差值步,然后一起走,节点相等时即为相交点
      */
-    public static Node noLoop(Node head1,Node head2){
+    public static Node noLoop(Node head1, Node head2) {
+        // 计算两个链表长度的差值 n
         int n = 0;
         Node cur1 = head1;
         Node cur2 = head2;
-        while (cur1 != null){
+        while (cur1.next != null) {
             n++;
             cur1 = cur1.next;
         }
-        while (cur2 != null){
+        while (cur2.next != null) {
             n--;
             cur2 = cur2.next;
         }
 //        尾节点不一样，一定不相交
-        if (cur1 != cur2){
+        if (cur1 != cur2) {
             return null;
         }
-//       此时，n是两个链表长度的差值
+//       cur1指向长链表的头节点
         cur1 = n > 0 ? head1 : head2;
         cur2 = cur1 == head1 ? head2 : head1;
         n = Math.abs(n);
-        while (n != 0){
+        // 长链表先走差值步,然后和短链表一起遍历
+        while (n != 0) {
             n--;
             cur1 = cur1.next;
         }
-        while (cur1 != cur2){
+        while (cur1 != cur2) {
             cur1 = cur1.next;
             cur2 = cur2.next;
         }
@@ -100,41 +126,42 @@ public class FindFirstIntersectNode {
 
     /**
      * 两个链表都有环：
-     *  ① 两个链表的入环点相同时，Y型相交
-     *  ② 入环点不同，loop2不出现在链表1的环上，即不相交
-     *  ③ loop2 出现在链表1的环上，在环上相交
+     * ① 两个链表的入环点相同时，Y型相交
+     * ② 入环点不同，loop2不出现在链表1的环上，即不相交
+     * ③ loop2 出现在链表1的环上，在环上相交
      */
-    public static Node bothLoop(Node head1, Node loop1, Node head2, Node loop2){
+    public static Node bothLoop(Node head1, Node loop1, Node head2, Node loop2) {
         Node cur1;
         Node cur2;
-        if (loop1 == loop2){
+        // 入环点相同
+        if (loop1 == loop2) {
             int n = 0;
             cur1 = head1;
             cur2 = head2;
-            while (cur1 != loop1){
+            while (cur1 != loop1) {
                 n++;
                 cur1 = cur1.next;
             }
-            while (cur2 != loop2){
+            while (cur2 != loop2) {
                 n--;
                 cur2 = cur2.next;
             }
             cur1 = n > 0 ? head1 : head2;
             cur2 = cur1 == head1 ? head2 : head1;
             n = Math.abs(n);
-            while (n != 0){
+            while (n != 0) {
                 n--;
                 cur1 = cur1.next;
             }
-            while (cur1 != cur2){
+            while (cur1 != cur2) {
                 cur1 = cur1.next;
                 cur2 = cur2.next;
             }
             return cur1;
-        }else {
+        } else {
             cur1 = loop1.next;
-            while (cur1 != loop1){
-                if (cur1 == loop2){
+            while (cur1 != loop1) {
+                if (cur1 == loop2) {
                     return loop1;
                 }
                 cur1 = cur1.next;
@@ -143,7 +170,7 @@ public class FindFirstIntersectNode {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // 1->2->3->4->5->6->7->null
         Node head1 = new Node(1);
         head1.next = new Node(2);
@@ -159,7 +186,11 @@ public class FindFirstIntersectNode {
         head2.next.next = new Node(8);
         head2.next.next.next = head1.next.next.next.next.next;
         // 1-- 6
-        System.out.println("1-- " + getIntersectNode(head1, head2).data);
+        if (getIntersectNode(head1, head2) == null) {
+            System.out.println("不相交");
+        } else {
+            System.out.println("1-- " + getIntersectNode(head1, head2).data);
+        }
 
         // 1->2->3->4->5->6->7->4...
         head1 = new Node(1);
@@ -187,9 +218,11 @@ public class FindFirstIntersectNode {
         // 3-- 4
         System.out.println("3-- " + getIntersectNode(head1, head2).data);
     }
-    private static class Node{
+
+    private static class Node {
         int data;
         Node next;
+
         public Node(int data) {
             this.data = data;
         }
