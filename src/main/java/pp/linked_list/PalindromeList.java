@@ -88,18 +88,9 @@ public class PalindromeList {
             slow = slow.next;
         }
         // 2.将右半部分逆序
-        Node prev = slow;
-        prev.next = null;
-        Node cur = slow.next;
-        Node next;
-        while (cur != null){
-            next = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = next;
-        }
+        Node prev = reverse(slow.next);
         //暂存尾节点
-        cur = prev;
+        Node cur = prev;
         boolean flag = true;
         while (head != null && prev != null){
             if (head.data != prev.data){
@@ -110,13 +101,7 @@ public class PalindromeList {
             prev = prev.next;
         }
         // 3.逆序回来
-        prev = null;
-        while (cur != null){
-            next = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = next;
-        }
+       reverse(cur);
         return flag;
     }
 
@@ -241,4 +226,18 @@ public class PalindromeList {
         }
     }
 
+    public static Node reverse(Node node){
+        if (node == null || node.next == null){
+            return node;
+        }
+        Node prev = null;
+        Node next;
+        while (node != null){
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return prev;
+    }
 }

@@ -92,6 +92,9 @@ public class FindFirstIntersectNode {
      * ②Y型相交,长链表先走差值步,然后一起走,节点相等时即为相交点
      */
     public static Node noLoop(Node head1, Node head2) {
+        if (head1 == null || head2 == null) {
+            return null;
+        }
         // 计算两个链表长度的差值 n
         int n = 0;
         Node cur1 = head1;
@@ -122,6 +125,23 @@ public class FindFirstIntersectNode {
             cur2 = cur2.next;
         }
         return cur1;
+    }
+
+    /**
+     * 拼接链表消除差值法
+     * 路程相同,速度相同,终点一致,一定同时到达岔路口,到达终点
+     */
+    public static Node noLoop2(Node head1, Node head2) {
+        if (head1 == null || head2 == null) {
+            return null;
+        }
+        Node node1 = head1;
+        Node node2 = head2;
+        while (node1 != node2) {
+            node1 = node1 == null ? head2 : node1.next;
+            node2 = node2 == null ? head1 : node2.next;
+        }
+        return node1;
     }
 
     /**
