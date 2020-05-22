@@ -19,7 +19,6 @@ public class MyQueue {
 
     /**
      * 入队
-     * @param element  入队的元素
      */
     public void enQueue(int element) throws Exception {
         if ((rear+1)%array.length == front){

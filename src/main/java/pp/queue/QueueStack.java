@@ -1,4 +1,4 @@
-package pp.stack;
+package pp.queue;
 
 import java.util.LinkedList;
 import java.util.Queue;

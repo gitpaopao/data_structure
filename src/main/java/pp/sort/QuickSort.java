@@ -87,7 +87,7 @@ public class QuickSort {
      * 双边循环法
      *
      * 需要注意的点：
-     *     ① 从基准值对面的哨兵可以移动
+     *     ① 从基准值对面的哨兵可以移动(哨兵在左侧,从左侧开始走的话,停的位置是大于哨兵的,与哨兵进行交换是不符合要求的)
      *     ② 注意判断条件，不能卡在基准值的位置
      */
     public static int patition1(int[] arr,int l,int r){
@@ -110,11 +110,10 @@ public class QuickSort {
             }
         }
 
-        /*   指针重合位置的值，交换到第一个位置
-             指针重合处，就是基准值的位置
+        /*
+             指针重合处,就是基准值的位置：右侧都比基准大,左侧比基准小
              两个指针会重合：1⃣️ j停下，i走到j，j停下是遇到了小于pivot的值
                            2⃣️ j走到i，i位置的值一定小于等于pivot
-             所以重合位置的值一定是小于等于pivot的，交换到第一个位置是合理的
         */
         swap(arr,left,l);
         return left;
@@ -124,11 +123,8 @@ public class QuickSort {
 
     /**
      * 单边循环法
-     * @param arr    待交换的数组
-     * @param l    起始下标
-     * @param r    结束下标
      *
-     * mark作为小于pivot的边界，当遍历到小于pivot的值时，mark++，然后与mark交换
+     * mark作为小于pivot的边界，当遍历到小于pivot的值时，mark后移一个，然后与新mark交换，相当于小区扩大一个位置
      * 所以mark所在位置以及左边，都是小于pivot
      * 遍历到最后时，pivot与mark交换，以保证左边都是小于pivot的，右侧是大于等于pivot的
      */
@@ -149,9 +145,9 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[] {4,4,6,5,1};
-        quickSort(arr, 0, arr.length-1);
-//        process1(arr,0,arr.length-1);
+        int[] arr = new int[] {3,4,2,1,5,6,7,8,5};
+        // quickSort(arr, 0, arr.length-1);
+       process1(arr,0,arr.length-1);
         System.out.println(Arrays.toString(arr));
     }
 }

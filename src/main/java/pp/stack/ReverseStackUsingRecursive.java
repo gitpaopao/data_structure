@@ -10,6 +10,7 @@ import java.util.Stack;
  */
 public class ReverseStackUsingRecursive {
 
+
     public static void reverseStack(Stack<Integer> stack) {
         if (stack.isEmpty()) {
             return;
@@ -19,7 +20,12 @@ public class ReverseStackUsingRecursive {
         stack.push(tail);
     }
 
-    // 获取并删除栈底元素
+    /*
+     获取并删除栈底元素
+     ①出栈,如果栈为空了,就是栈底元素
+     ②如果不是,再继续获取剩下栈的栈底元素,然后将当前元素放进去
+       就是一个个元素出栈,删除掉栈底后,再按顺序一个个入栈
+      */
     public static int getAndRemoveStackTail(Stack<Integer> stack) {
         Integer top = stack.pop();
         if (stack.isEmpty()) {
