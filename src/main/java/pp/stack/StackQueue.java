@@ -1,4 +1,4 @@
-package pp.queue;
+package pp.stack;
 
 import java.util.Stack;
 

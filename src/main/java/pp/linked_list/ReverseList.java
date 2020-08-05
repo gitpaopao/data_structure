@@ -41,7 +41,7 @@ public class ReverseList {
      */
     private static Node reverse1(Node head) {
         if (head == null || head.next == null) {
-            return null;
+            return head;
         }
         Node prev = null;
         Node cur = head;
@@ -56,13 +56,15 @@ public class ReverseList {
 
     /**
      * 递归反转链表
-     *   从右向左反转
+     * 从右向左反转
+     *
      * @return 头节点，原尾节点
      */
     private static Node reverse2(Node head) {
-        if (head == null || head.next == null){
+        if (head == null || head.next == null) {
             return head;
         }
+        // 最后一个元素,即反转后新链表的头节点
         Node rear = reverse2(head.next);
         head.next.next = head;
         head.next = null;
@@ -75,7 +77,9 @@ public class ReverseList {
         head.next.next = new Node(3);
         head.next.next.next = new Node(4);
         head.next.next.next.next = null;
-        print(reverse1(head));
+        print(head);
+        System.out.println();
+        print(reverse2(head));
     }
 
     private static class Node {
@@ -86,6 +90,7 @@ public class ReverseList {
             this.data = data;
         }
     }
+
     private static void print(Node head) {
         while (head != null) {
             System.out.print(head.data);
