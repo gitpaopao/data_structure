@@ -1,4 +1,4 @@
-package q2;
+package q3;
 
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class WebServer {
             while (true) {
 
                 Socket socket = serverSocket.accept();
-                new HttpServer(socket).start();
+                new SocketHandle(socket);
             }
         } catch (IOException e) {
             e.printStackTrace();
