@@ -1,6 +1,5 @@
 package pp.wh;
 
-import lombok.Data;
 
 /**
  * Created by pkpm on 2019/9/24

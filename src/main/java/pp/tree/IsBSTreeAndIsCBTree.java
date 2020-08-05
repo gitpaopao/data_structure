@@ -14,9 +14,11 @@ public class IsBSTreeAndIsCBTree {
      *           判断：中序遍历是升序的
      */
     private static boolean isBSTree(TreeNode head){
+
         if (head == null){
             return true;
         }
+
         Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = head;
         TreeNode pre = null;
@@ -24,7 +26,9 @@ public class IsBSTreeAndIsCBTree {
             stack.push(cur);
             cur = cur.left;
         }
+
         while (!stack.isEmpty()){
+
             TreeNode pop = stack.pop();
 //            访问该元素的时候，就与前驱节点比较
             if (pre != null && pop.data < pre.data){
