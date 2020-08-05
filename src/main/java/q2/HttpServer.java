@@ -23,6 +23,8 @@ public class HttpServer extends Thread {
      */
     private OutputStream out;
 
+    private Socket socket;
+
     /**
      * @param socket
      * @description:初始化socket对象,获取对应 输入，输出流
@@ -30,6 +32,7 @@ public class HttpServer extends Thread {
     public HttpServer(Socket socket) {
 
         try {
+            this.socket = socket;
             input = socket.getInputStream();
             out = socket.getOutputStream();
         } catch (IOException e) {
@@ -69,9 +72,9 @@ public class HttpServer extends Thread {
                     sb.append(line).append("\r\n");
                 }
                 StringBuffer result = new StringBuffer();
-                result.append("HTTP /1.1 200 ok /r/n");
-                result.append("Content-Type:text/html /r/n");
-                result.append("Content-Length:" + file.length() + "/r/n");
+                result.append("HTTP/1.1 200 ok \r\n");
+                result.append("Content-Type:text/html \r\n");
+                result.append("Content-Length:" + file.length() + "\r\n");
                 result.append("\r\n:" + sb.toString());
                 out.write(result.toString().getBytes());
                 out.flush();
@@ -83,7 +86,7 @@ public class HttpServer extends Thread {
         } else {
             // 2、资源不存在，提示 file not found
             StringBuffer error = new StringBuffer();
-            error.append("HTTP /1.1 400 file not found /r/n");
+            error.append("HTTP/1.1 400 file not found \r\n");
             error.append("Content-Type:text/html \r\n");
             error.append("Content-Length:20 \r\n").append("\r\n");
             error.append("<h1 >File Not Found..</h1>");

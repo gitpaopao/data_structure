@@ -16,7 +16,6 @@ public class Server {
      */
     private OutputStream out;
 
-
     public void doRequest(int port) throws IOException {
 
        ServerSocket serverSocket = new ServerSocket(port);
@@ -27,6 +26,12 @@ public class Server {
        out = socket.getOutputStream();
 
         String read = read();
+        if ("/shutdown".equals(read)){
+            input.close();
+            out.close();
+            socket.close();
+            return;
+        }
         resposne(read);
 
     }
@@ -37,7 +42,7 @@ public class Server {
      */
     private void resposne(String filePath) {
 
-        File file = new File("/Users/jingxian/IdeaProjects/src/main/resource" + filePath);
+        File file = new File("f:" + filePath);
         System.out.println(file.getPath());
 
         if (file.exists()){
@@ -49,14 +54,14 @@ public class Server {
                 String line;
 
                 while((line=reader.readLine()) != null){
-                    buffer.append(line);
+                    buffer.append(line).append("\r\n");
                 }
 
                 StringBuffer result = new StringBuffer();
-                result.append("HTTP /1.1 200 ok \r");
-                result.append("Content-Type:text/html \r");
-                result.append("Content-Length:" + file.length() + "\r");
-                result.append("\r:" + buffer.toString());
+                result.append("HTTP/1.1 200 ok \r\n");
+                result.append("Content-Type:text/html \r\n");
+                result.append("Content-Length:" + file.length() + "\r\n");
+                result.append("\r\n:" + buffer.toString());
 
                 out.write(result.toString().getBytes());
 
@@ -69,10 +74,10 @@ public class Server {
         }else {
             // 2、资源不存在，提示 file not found
             StringBuffer error = new StringBuffer();
-            error.append("HTTP /1.1 400 file not found \r");
-            error.append("Content-Type:text/html \r");
-            error.append("Content-Length:20 \r\n").append("\r");
-            error.append("<h1 >File Not Found..</h1>");
+            error.append("HTTP/1.1 404 not found \r\n");
+            error.append("Content-Type:text/html \r\n");
+            error.append("Content-Length:20 \r\n").append("\r\n");
+            error.append("<h1 >404 Not Found..</h1>");
             try {
                 out.write(error.toString().getBytes());
                 out.flush();
@@ -100,6 +105,7 @@ public class Server {
             if (split.length != 3){
                 return null;
             }
+            System.out.println(split[1]);
             return split[1];
 
         }catch (Exception e){
