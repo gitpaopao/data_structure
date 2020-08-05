@@ -45,6 +45,8 @@ public class Islands {
         infect(array,i,j-1,m,n);
         infect(array,i,j+1,m,n);
     }
+
+
     public static void main(String[] args){
         int[][] m1 = {  { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                         { 0, 1, 1, 1, 0, 1, 1, 1, 0 },

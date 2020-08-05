@@ -56,18 +56,4 @@ public class exer {
      * 15.汉诺塔问题
      *  打印n 层汉诺塔从最左边移动最右边的全部过程
      */
-
-    public static void main(String[] args){
-        // int i = 1;
-        // i = i++;
-        // int j = i++;
-        // int k = i + ++i * i++;
-        // System.out.println("i= " + i);
-        // System.out.println("j= " + j);
-        // System.out.println("k= " + k);
-
-        for (int i=0; i<5; i++){
-            System.out.println(i);
-        }
-    }
 }

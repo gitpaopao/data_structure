@@ -40,7 +40,7 @@ public class Cow {
         int prepre = 1;
         int tmp;
         for (int i = 4; i <= n; i++) {
-            tmp = res;
+            tmp = 0;
             res += prepre;
             prepre = pre;
             pre = tmp;
