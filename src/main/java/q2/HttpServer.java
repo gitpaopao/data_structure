@@ -18,6 +18,8 @@ public class HttpServer extends Thread {
      */
     private OutputStream out;
 
+    private Socket socket;
+
     /**
      * @param socket
      * @description:初始化socket对象,获取对应 输入，输出流
@@ -25,6 +27,7 @@ public class HttpServer extends Thread {
     public HttpServer(Socket socket) {
 
         try {
+            this.socket = socket;
             input = socket.getInputStream();
             out = socket.getOutputStream();
         } catch (IOException e) {
