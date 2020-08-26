@@ -9,11 +9,6 @@ import java.net.Socket;
 public class HttpServer extends Thread {
 
     /**
-     * web资源根路径
-     */
-    public static final String ROOT = "c:/";
-
-    /**
      * 输入流对象,读取浏览器请求
      */
     private InputStream input;
@@ -69,9 +64,9 @@ public class HttpServer extends Thread {
                     sb.append(line).append("\r\n");
                 }
                 StringBuffer result = new StringBuffer();
-                result.append("HTTP /1.1 200 ok /r/n");
-                result.append("Content-Type:text/html /r/n");
-                result.append("Content-Length:" + file.length() + "/r/n");
+                result.append("HTTP/1.1 200 ok \r\n");
+                result.append("Content-Type:text/html \r\n");
+                result.append("Content-Length:" + file.length() + "\r\n");
                 result.append("\r\n:" + sb.toString());
                 out.write(result.toString().getBytes());
                 out.flush();
@@ -83,7 +78,7 @@ public class HttpServer extends Thread {
         } else {
             // 2、资源不存在，提示 file not found
             StringBuffer error = new StringBuffer();
-            error.append("HTTP /1.1 400 file not found /r/n");
+            error.append("HTTP/1.1 400 file not found \r\n");
             error.append("Content-Type:text/html \r\n");
             error.append("Content-Length:20 \r\n").append("\r\n");
             error.append("<h1 >File Not Found..</h1>");
