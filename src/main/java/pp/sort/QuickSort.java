@@ -112,7 +112,7 @@ public class QuickSort {
 
         /*
              指针重合处,就是基准值的位置：右侧都比基准大,左侧比基准小
-             两个指针会重合：1⃣️ j停下，i走到j，j停下是遇到了小于pivot的值
+             两个指针会重合：1⃣️ j停下，j停下是遇到了小于pivot的值，i走到j
                            2⃣️ j走到i，i位置的值一定小于等于pivot
         */
         swap(arr,left,l);
